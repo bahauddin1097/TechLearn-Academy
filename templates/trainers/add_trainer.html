@@ -1,0 +1,16 @@
+{% extends 'home.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}TechLearn Academy - Add Trainer{% endblock %}
+
+{% block content %}
+<div class="container pt-4 px-4">
+    <h2>Add trainer</h2>
+
+    <form action="{% url 'add_trainer' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button class="btn btn-primary" type="submit">Add</button>
+    </form>
+</div>
+{% endblock %}

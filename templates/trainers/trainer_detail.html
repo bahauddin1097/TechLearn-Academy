@@ -1,0 +1,17 @@
+{% extends 'home.html' %}
+
+{% block title %}TechLearn Academy - Trainer Detail{% endblock %}
+
+{% block content %}
+<div class="container pt-4 px-4">
+    <div class="d-flex justify-content-center align-items-center">
+        <img src="{{ trainer.photo.url }}" alt="trainer-profile-photo" style="width:200px">
+    
+        <div class="ps-2">
+            <h2>{{ trainer.name }}</h2>
+            <p>{{ trainer.email }}</p>
+            <p><span class="fw-medium">Expertise:</span> {{ trainer.expertise }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

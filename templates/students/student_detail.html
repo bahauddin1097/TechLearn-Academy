@@ -1,0 +1,29 @@
+{% extends 'home.html' %}
+
+{% block title %}TechLearn Academy - Student Detail{% endblock %}
+
+{% block content %}
+<div class="container pt-4 px-4">
+    <h2>{{ student.name }}</h2>
+
+    <table class="table table-light table-hover table-borderless table-responsive">
+        <tbody>
+            <tr>
+                <td>Email</td>
+                <td>{{ student.email }}</td>
+            </tr>
+            <tr>
+                <td>Enrolled course</td>
+                <td>{{ student.enrolled_course }}</td>
+            </tr>
+            <tr>
+                <td>Trainer</td>
+                <td>{{ student.trainer }}</td>
+            </tr>
+            <tr>
+                <td>Active</td>
+                <td>{{ student.is_active }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'home.html' %}
+
+{% block title %}TechLearn Academy - Course Detail{% endblock %}
+
+{% block content %}
+<div class="container pt-4 px-4">
+    <div class="d-flex flex-column-reverse flex-lg-row justify-content-between">
+        <div>
+            <h2>{{ course.name }}</h2>
+            <p>{{ course.description }}</p>
+            <p>Duration: {{ course.duration }}</p>
+            <button class="btn btn-primary">Enroll</button>
+        </div>
+        <div class="ps-2 pb-3 mx-auto">
+            <img src="{{ course.image.url }}" class="rounded" alt="{{ course.name }}-logo" style="width:250px; height:200px">
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -6,43 +6,94 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>TechLearn Academy - Home</title>
+        <title>{% block title %}TechLearn Academy - Home{% endblock %}</title>
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
             integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+            integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
 
     <body>
-        <!-- Navbar -->
-        {% include 'navbar.html' %}
+        <nav class="navbar sticky-top navbar-expand-lg bg-body-secondary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{% url 'home' %}">TechLearn Academy</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'home' %}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'courses' %}">Courses</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'trainers' %}">Trainers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'students' %}">Students</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        {% if not user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-light" href="{% url 'login' %}">
+                                <i class="fa-solid fa-right-to-bracket"></i> Log in</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-light" href="{% url 'register' %}">
+                                <i class="fa-solid fa-user"></i> Sign up</a>
+                        </li>
+                        {% else %}
+                        <span class="navbar-text me-2">{{ user }}</span>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-light" href="{% url 'logout' %}">
+                                <i class="fa-solid fa-right-to-bracket"></i> Log out</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
 
-        <!-- Features -->
-        <div class="container px-4 py-5" id="hanging-icons">
-            <h2 class="pb-2 border-bottom">Academy Overview</h2>
-            <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
-                <div class="col d-flex align-items-start">
+        {% block content %}
+        <div class="container pt-4 px-4" id="hanging-icons">
+            <h2 class="pb-2 border-bottom">Academy Dashboard</h2>
+            <div class="row g-5 py-5 row-cols-1  row-cols-sm-2 row-cols-md-3">
+                <div class="col d-flex">
+                    <div class="fs-3 me-1">
+                        <i class="fa-solid fa-book"></i>
+                    </div>
                     <div>
-                        <h3 class="fs-2 text-body-emphasis">Total Courses</h3>
-                        <p>{{ courses }}</p>
-                        <a href="{% url 'courses' %}" class="btn btn-primary">View courses</a>
+                        <h3 class="fs-2 text-body-emphasis">Courses</h3>
+                        <p class="d-flex justify-content-center fs-3 fw-m">{{ courses }}</p>
                     </div>
                 </div>
-                <div class="col d-flex align-items-start">
+                <div class="col d-flex">
+                    <div class="fs-3 me-2">
+                        <i class="fa-solid fa-person-chalkboard"></i>
+                    </div>
                     <div>
-                        <h3 class="fs-2 text-body-emphasis">Total Trainers</h3>
-                        <p>{{ trainers }}</p>
-                        <a href="{% url 'trainers' %}" class="btn btn-primary">Know trainers</a>
+                        <h3 class="fs-2 text-body-emphasis">Trainers</h3>
+                        <p class="d-flex justify-content-center fs-3 fw-m">{{ trainers }}</p>
                     </div>
                 </div>
-                <div class="col d-flex align-items-start">
+                <div class="col d-flex">
+                    <div class="fs-3 me-1">
+                        <i class="fa-solid fa-user-graduate"></i>
+                    </div>
                     <div>
-                        <h3 class="fs-2 text-body-emphasis">Total Students</h3>
-                        <p>{{ students }}</p>
-                        <a href="{% url 'students' %}" class="btn btn-primary">View students</a>
+                        <h3 class="fs-2 text-body-emphasis">Students</h3>
+                        <p class="d-flex justify-content-center fs-3 fw-m">{{ students }}</p>
                     </div>
                 </div>
             </div>
         </div>
+        {% endblock %}
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"

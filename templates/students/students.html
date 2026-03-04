@@ -1,0 +1,59 @@
+{% extends 'home.html' %}
+
+{% block title %}TechLearn Academy - Students{% endblock %}
+
+{% block content %}
+<div class="container pt-4 px-4">
+    <div class="d-flex align-items-center justify-content-between">
+        <div class="fs-3">
+            <h2 class="pb-2"><i class="fa-solid fa-user-graduate"></i>Students</h2>
+        </div>
+        {% if perms.academy.add_student %}
+        <div>
+            <a href="{% url 'add_student' %}" class="btn btn-sm btn-primary">
+                <i class="fa-solid fa-user-plus"></i> Add student
+            </a>
+        </div>
+        {% endif %}
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Enrolled Course</th>
+                    <th scope="col">Trainer</th>
+                    {% if perms.academy.edit_student or perms.academy.delete_student %}
+                    <th scope="col">Action</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                <tr>
+                    <td>
+                        <a href="{% url 'student_detail' student.id %}" class="text-decoration-none">
+                            {{ student.name }}
+                        </a>
+                    </td>
+                    <td>{{ student.enrolled_course }}</td>
+                    <td>{{ student.trainer.name }}</td>
+                    <td>
+                        {% if perms.academy.edit_student %}
+                        <a href="{% url 'edit_student' student.id %}" class="text-decoration-none">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                        {% endif %}
+                        {% if perms.academy.delete_student %}
+                        <a href="{% url 'delete_student' student.id %}" class="text-decoration-none">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

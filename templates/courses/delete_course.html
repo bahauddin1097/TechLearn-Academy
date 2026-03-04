@@ -1,0 +1,18 @@
+{% extends 'home.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}TechLearn Academy - Delete Course{% endblock %}
+
+{% block content %}
+<div class="container pt-4 px-4">
+    <h2>Delete course</h2>
+    <h5>Are you sure you want to delete?</h5>
+
+    <form action="{% url 'delete_course' course.id %}" method="post" class="pt-3">
+        {% csrf_token %}
+        {{ form|crispy }}
+
+        <button class="btn btn-danger" type="submit">Yes, delete</button>
+    </form>
+</div>
+{% endblock%}
